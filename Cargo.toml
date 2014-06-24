@@ -1,0 +1,9 @@
+[package]
+
+name = "meshload"
+version = "0.1.0"
+authors = ["burtonageo@gmail.com"]
+
+[[lib]]
+
+name = "meshload"
