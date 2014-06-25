@@ -5,8 +5,7 @@ Rust-MeshLoad is a small library which provides functionality for loading common
 including:
 
   * WaveFront Obj
-  * Collada
-  * possible others: .blend
+  * possible others: blend, fbx, collada, etc
 
 Rust-MeshLoad makes no assumptions about the internal representation of your mesh data, and leaves
 you free to define your own mesh structures for your app/game. All it requires is that you implement:
