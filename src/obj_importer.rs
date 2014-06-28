@@ -6,7 +6,7 @@ use types::{VertexColor, VertexNormal, VertexPoint, VertexUvCoord, Mesh};
 pub struct ObjImporter;
 
 impl ObjImporter {  
-    fn new() -> ObjImporter {
+    pub fn new() -> ObjImporter {
         ObjImporter
     }
 }
