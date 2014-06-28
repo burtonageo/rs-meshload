@@ -1,9 +1,5 @@
 use std::io::{IoResult};
-
 use types::Mesh;
-
-#[path = "./types.rs"]
-mod types;
 
 pub trait MeshImporter<T0: Float,
                        T1: Float,

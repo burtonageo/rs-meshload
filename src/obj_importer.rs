@@ -3,11 +3,6 @@ use std::io::{BufferedReader, File, IoResult};
 use importer::{MeshImporter};
 use types::{VertexColor, VertexNormal, VertexPoint, VertexUvCoord, Mesh};
 
-#[path = "./importer.rs"]
-mod importer;
-#[path = "./types.rs"]
-mod types;
-
 pub struct ObjImporter;
 
 impl ObjImporter {  
