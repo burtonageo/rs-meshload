@@ -4,8 +4,10 @@
 #![license = "MIT"]
 #![crate_type = "lib"]
 
-pub use meshload = meshload_types;
-pub use meshload = obj_mesh_loader;
+pub use meshload = types;
+pub use meshload = importer;
+pub use meshload = obj_importer;
 
-mod meshload_types;
-mod obj_mesh_loader;
+mod importer;
+mod types;
+mod obj_importer;

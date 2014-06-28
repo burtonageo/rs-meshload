@@ -37,18 +37,11 @@ pub trait SceneNode<T> {
     fn add_child(&mut self, child_node: Self) -> ();
 }
 
-pub trait Scene<T> {
+pub trait Scene {
     fn new_with_root_node(&SceneNode<T>) -> Self;
     fn new_with_no_root_node()           -> Self;
 }
-*/
-pub trait MeshImporter<T0: Float,
-                       T1: Float,
-                       T2: Float,
-                       T3: Float> {
-    fn load_mesh_file(&self, file_name: &str) -> IoResult<&Mesh<T0, T1, T2, T3>>;
-}
-/*
+
 pub trait SceneImporter<T0: Float,
                         T1: Float,
                         T2: Float,
