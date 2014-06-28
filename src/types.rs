@@ -1,5 +1,3 @@
-use std::io::{IoResult};
-
 pub trait VertexColor<T: Float> {
     fn new_with_rgba(r: T, g: T, b: T, a: T) -> Self;
     fn new_with_rgb(r: T, g: T, b: T)        -> Self;
