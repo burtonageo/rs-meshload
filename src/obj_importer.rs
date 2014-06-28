@@ -3,7 +3,7 @@ use std::io::{BufferedReader, File, IoResult};
 use importer::{MeshImporter};
 use types::{VertexColor, VertexNormal, VertexPoint, VertexUvCoord, Mesh};
 
-pub struct ObjImporter;
+struct ObjImporter;
 
 impl ObjImporter {  
     pub fn new() -> ObjImporter {
