@@ -11,13 +11,17 @@ impl ObjImporter {
     }
 }
 
-impl<T0: Float,
-     T1: Float,
-     T2: Float,
-     T3: Float> MeshImporter<T0, T1, T2, T3> for ObjImporter {
+impl<F0: Float,
+     VC: VertexColor<F0>,
+     F1: Float,
+     VP: VertexPoint<F1>,
+     F2: Float,
+     VN: VertexNormal<F2>,
+     F3: Float,
+     VU: VertexUvCoord<F3>,
+     M:  Mesh<F0, VC, F1, VP, F2, VN, F3, VU>> MeshImporter<F0, VC, F1, VP, F2, VN, F3, VU, M> for ObjImporter {
 
-    fn load_mesh_file(&self, file_name: &str) -> IoResult<&Mesh<T0, T1, T2, T3>>
-    {
+    fn load_mesh_file(&self, file_name: &str) -> IoResult<M> {
         let path = Path::new(file_name);
         let mut file = BufferedReader::new(File::open(&path));
         for ln in file.lines() {
@@ -33,9 +37,14 @@ impl<T0: Float,
     }
 }
 
-pub fn load_obj_mesh<T0: Float,
-                     T1: Float,
-                     T2: Float,
-                     T3: Float>(file_name: &str) -> IoResult<&Mesh<T0, T1, T2, T3>> {
+pub fn load_obj_mesh<F0: Float,
+                     VC: VertexColor<F0>,
+                     F1: Float,
+                     VP: VertexPoint<F1>,
+                     F2: Float,
+                     VN: VertexNormal<F2>,
+                     F3: Float,
+                     VU: VertexUvCoord<F3>,
+                     M:  Mesh<F0, VC, F1, VP, F2, VN, F3, VU>>(file_name: &str) -> IoResult<M> {
     ObjImporter::new().load_mesh_file(file_name)
 }

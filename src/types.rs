@@ -1,27 +1,32 @@
 pub trait VertexColor<T: Float> {
-    fn new_with_rgba(r: T, g: T, b: T, a: T) -> Self;
-    fn new_with_rgb(r: T, g: T, b: T)        -> Self;
+    fn new(r: T, g: T, b: T, a: T) -> Self;
 }
 
 pub trait VertexNormal<T: Float> {
-    fn new_with_xyz(x: T, y: T, z: T) -> Self;
+    fn new(x: T, y: T, z: T) -> Self;
 }
 
 pub trait VertexPoint<T: Float> {
-    fn new_with_xyzw(x: T, y: T, z: T, w: T) -> Self;
-    fn new_with_xyz(x: T, y: T, z: T)        -> Self;
+    fn new(x: T, y: T, z: T, w: T) -> Self;
 }
 
 pub trait VertexUvCoord<T: Float> {
-    fn new_with_uv(u: T, v: T) -> Self;
+    fn new(u: T, v: T) -> Self;
 }
 
-pub trait Mesh<T0: Float, T1: Float, T2: Float, T3: Float> {
-    fn new(colors:    &[&VertexColor<T0>],
-           points:    &[&VertexPoint<T1>],
-           normals:   &[&VertexNormal<T2>],
-           uv_coords: &[&VertexUvCoord<T3>],
-           textures:  &[&str])               -> Self;
+pub trait Mesh<F0: Float,
+               VC: VertexColor<F0>,
+               F1: Float,
+               VP: VertexPoint<F1>,
+               F2: Float,
+               VN: VertexNormal<F2>,
+               F3: Float,
+               VU: VertexUvCoord<F3>> {
+    fn new(colors:    &[VC],
+           points:    &[VP],
+           normals:   &[VN],
+           uv_coords: &[VU],
+           textures:  &[&str]) -> Self;
 }
 /*
 pub trait SceneNode<T> {
