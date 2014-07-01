@@ -1,7 +1,7 @@
 use std::io::{BufferedReader, File, IoResult};
 
 use importer::{MeshImporter};
-use types::{VertexColor, VertexNormal, VertexPoint, VertexUvCoord, Mesh};
+use types::{Mesh, VertexColor, VertexNormal, VertexPoint, VertexUvCoord};
 
 struct ObjImporter;
 
@@ -20,9 +20,19 @@ impl<F0: Float, VC: VertexColor<F0>,
     fn load_mesh_file(&self, file_name: &str) -> IoResult<M> {
         let path = Path::new(file_name);
         let mut file = BufferedReader::new(File::open(&path));
-        // file.lines().
 
-        fail!("Not yet implemented!");
+        let (mut temp_colors, mut final_colors): (&[VC], &[VC]);
+        let (mut temp_points, mut final_points): (&[VP], &[VP]);
+        let (mut temp_normals, mut final_normals): (&[VN], &[VN]);
+        let (mut temp_uvcoords, mut final_uvcoords): (&[VU], &[VU]);
+
+        let mut textures: &[&str];
+
+        file.lines()
+            .take_while(|line| line.is_ok())
+            .map(|line| line.unwrap());
+
+        unimplemented!();
     }
 }
 
