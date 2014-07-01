@@ -1,5 +1,9 @@
+
+// using workaround described in
+// http://stackoverflow.com/questions/20342436/rust-invoke-trait-method-on-generic-type-parameter
+
 pub trait VertexColor<T: Float> {
-    fn new(r: T, g: T, b: T, a: T) -> Self;
+    fn new(_: Option<Self>, r: T, g: T, b: T, a: T) -> Self;
 
     fn get_r(&self) -> T;
     fn get_g(&self) -> T;
@@ -8,7 +12,7 @@ pub trait VertexColor<T: Float> {
 }
 
 pub trait VertexNormal<T: Float> {
-    fn new(x: T, y: T, z: T) -> Self;
+    fn new(_: Option<Self>, x: T, y: T, z: T) -> Self;
 
     fn get_x(&self) -> T;
     fn get_y(&self) -> T;
@@ -16,7 +20,7 @@ pub trait VertexNormal<T: Float> {
 }
 
 pub trait VertexPoint<T: Float> {
-    fn new(x: T, y: T, z: T, w: T) -> Self;
+    fn new(_: Option<Self>, x: T, y: T, z: T, w: T) -> Self;
 
     fn get_x(&self) -> T;
     fn get_y(&self) -> T;
@@ -25,7 +29,7 @@ pub trait VertexPoint<T: Float> {
 }
 
 pub trait VertexUvCoord<T: Float> {
-    fn new(u: T, v: T) -> Self;
+    fn new(_: Option<Self>, u: T, v: T) -> Self;
 
     fn get_u(&self) -> T;
     fn get_v(&self) -> T;
@@ -35,7 +39,8 @@ pub trait Mesh<F0: Float, VC: VertexColor<F0>,
                F1: Float, VP: VertexPoint<F1>,
                F2: Float, VN: VertexNormal<F2>,
                F3: Float, VU: VertexUvCoord<F3>> {
-    fn new(colors:    &[VC],
+    fn new(_: Option<Self>,
+           colors:    &[VC],
            points:    &[VP],
            normals:   &[VN],
            uv_coords: &[VU],

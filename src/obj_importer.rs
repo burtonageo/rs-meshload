@@ -19,7 +19,7 @@ impl<F0: Float, VC: VertexColor<F0>,
 
     fn load_mesh_file(&self, file_name: &str) -> IoResult<M> {
         let path = Path::new(file_name);
-        let mut file = BufferedReader::new(File::open(&path));
+        let mut file = BufferedReader::new(try!(File::open(&path)));
 
         let (mut temp_colors, mut final_colors): (&[VC], &[VC]);
         let (mut temp_points, mut final_points): (&[VP], &[VP]);
@@ -28,11 +28,17 @@ impl<F0: Float, VC: VertexColor<F0>,
 
         let mut textures: &[&str];
 
-        file.lines()
-            .take_while(|line| line.is_ok())
-            .map(|line| line.unwrap());
+        for l in file.lines().filter(|line| line.is_ok()) {
+            let line = l.unwrap();
+         }
 
         unimplemented!();
+        Ok(Mesh::new(None::<M>,
+                     final_colors,
+                     final_points,
+                     final_normals,
+                     final_uvcoords,
+                     textures))
     }
 }
 
