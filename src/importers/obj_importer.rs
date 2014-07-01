@@ -1,6 +1,6 @@
 use std::io::{BufferedReader, File, IoResult};
 
-use importer::{MeshImporter};
+use importers::mesh_importer::{MeshImporter};
 use types::{Mesh, VertexColor, VertexNormal, VertexPoint, VertexUvCoord};
 
 struct ObjImporter;

@@ -5,9 +5,7 @@
 #![crate_type = "lib"]
 
 pub use meshload = types;
-pub use meshload = importer;
-pub use meshload = obj_importer;
+pub use meshload = importers;
 
-mod importer;
+mod importers;
 mod types;
-mod obj_importer;
