@@ -28,7 +28,7 @@ impl<F0: Float, VC: VertexColor<F0>,
 
         let mut textures: &[&str];
 
-        for l in file.lines().filter(|line| line.is_ok()) {
+        for l in file.lines().filter(|l| l.is_ok()) {
             let line = l.unwrap();
          }
 
