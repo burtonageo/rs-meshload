@@ -40,11 +40,11 @@ pub trait Mesh<F0: Float, VC: VertexColor<F0>,
                F2: Float, VN: VertexNormal<F2>,
                F3: Float, VU: VertexUvCoord<F3>> {
     fn new(_: Option<Self>,
-           colors:    &[VC],
-           points:    &[VP],
-           normals:   &[VN],
-           uv_coords: &[VU],
-           textures:  &[&str]) -> Self;
+           colors:    Vec<VC>,
+           points:    Vec<VP>,
+           normals:   Vec<VN>,
+           uv_coords: Vec<VU>,
+           textures:  Vec<&str>) -> Self;
 }
 /*
 pub trait NodeElement { }
