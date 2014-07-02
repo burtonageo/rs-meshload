@@ -32,7 +32,7 @@ impl<F0: Float, VC: VertexColor<F0>,
 
         for l in file.lines().filter(|l| l.is_ok()) {
             let line = l.unwrap();
-         }
+        }
 
         Ok(Mesh::new(None::<M>,
                      final_colors,
