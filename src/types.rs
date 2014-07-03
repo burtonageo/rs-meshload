@@ -48,7 +48,7 @@ pub trait Mesh<F0: Float, VC: VertexColor<F0>,
            points:    Vec<VP>,
            normals:   Vec<VN>,
            uv_coords: Vec<VU>,
-           textures:  Vec<&str>) -> Self;
+           textures:  Vec<String>) -> Self;
 }
 /*
 pub trait NodeElement { }
