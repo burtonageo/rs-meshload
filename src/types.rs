@@ -2,6 +2,7 @@
 // using workaround described in
 // http://stackoverflow.com/questions/20342436/rust-invoke-trait-method-on-generic-type-parameter
 
+#[deriving(Clone)]
 pub trait VertexColor<T: Float> {
     fn new(_: Option<Self>, r: T, g: T, b: T, a: T) -> Self;
 
@@ -11,6 +12,7 @@ pub trait VertexColor<T: Float> {
     fn get_a(&self) -> T;
 }
 
+#[deriving(Clone)]
 pub trait VertexNormal<T: Float> {
     fn new(_: Option<Self>, x: T, y: T, z: T) -> Self;
 
@@ -19,6 +21,7 @@ pub trait VertexNormal<T: Float> {
     fn get_z(&self) -> T;
 }
 
+#[deriving(Clone)]
 pub trait VertexPoint<T: Float> {
     fn new(_: Option<Self>, x: T, y: T, z: T, w: T) -> Self;
 
@@ -28,6 +31,7 @@ pub trait VertexPoint<T: Float> {
     fn get_w(&self) -> T;
 }
 
+#[deriving(Clone)]
 pub trait VertexUvCoord<T: Float> {
     fn new(_: Option<Self>, u: T, v: T) -> Self;
 
