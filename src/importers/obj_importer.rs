@@ -23,12 +23,12 @@ impl<F0: Float, VC: VertexColor<F0>,
         let path = Path::new(file_name);
         let mut file = BufferedReader::new(try!(File::open(&path)));
 
-        let (mut temp_colors, mut final_colors): (Vec<VC>, Vec<VC>) = (vec![], vec![]);
-        let (mut temp_points, mut final_points): (Vec<VP>, Vec<VP>) = (vec![], vec![]);
-        let (mut temp_normals, mut final_normals): (Vec<VN>, Vec<VN>) = (vec![], vec![]);
-        let (mut temp_uvcoords, mut final_uvcoords): (Vec<VU>, Vec<VU>) = (vec![], vec![]);
+        let (mut temp_colors, mut final_colors): (Vec<VC>, Vec<VC>) = (Vec::new(), Vec::new());
+        let (mut temp_points, mut final_points): (Vec<VP>, Vec<VP>) = (Vec::new(), Vec::new());
+        let (mut temp_normals, mut final_normals): (Vec<VN>, Vec<VN>) = (Vec::new(), Vec::new());
+        let (mut temp_uvcoords, mut final_uvcoords): (Vec<VU>, Vec<VU>) = (Vec::new(), Vec::new());
 
-        let mut textures: Vec<&str> = vec![];
+        let mut textures: Vec<&str> = Vec::new();
 
         for l in file.lines().filter(|l| l.is_ok()) {
             let line = l.unwrap();
