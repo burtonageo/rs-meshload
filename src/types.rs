@@ -3,7 +3,7 @@
 // http://stackoverflow.com/questions/20342436/rust-invoke-trait-method-on-generic-type-parameter
 
 #[deriving(Clone)]
-pub trait VertexColor<T: Float> {
+pub trait RgbaColor<T: Float> {
     fn new(_: Option<Self>, r: T, g: T, b: T, a: T) -> Self;
 
     fn get_r(&self) -> T;
@@ -13,7 +13,7 @@ pub trait VertexColor<T: Float> {
 }
 
 #[deriving(Clone)]
-pub trait VertexNormal<T: Float> {
+pub trait Normal<T: Float> {
     fn new(_: Option<Self>, x: T, y: T, z: T) -> Self;
 
     fn get_x(&self) -> T;
@@ -22,7 +22,7 @@ pub trait VertexNormal<T: Float> {
 }
 
 #[deriving(Clone)]
-pub trait VertexPoint<T: Float> {
+pub trait Point<T: Float> {
     fn new(_: Option<Self>, x: T, y: T, z: T, w: T) -> Self;
 
     fn get_x(&self) -> T;
@@ -32,17 +32,17 @@ pub trait VertexPoint<T: Float> {
 }
 
 #[deriving(Clone)]
-pub trait VertexUvCoord<T: Float> {
+pub trait UvCoord<T: Float> {
     fn new(_: Option<Self>, u: T, v: T) -> Self;
 
     fn get_u(&self) -> T;
     fn get_v(&self) -> T;
 }
 
-pub trait Mesh<F0: Float, VC: VertexColor<F0>,
-               F1: Float, VP: VertexPoint<F1>,
-               F2: Float, VN: VertexNormal<F2>,
-               F3: Float, VU: VertexUvCoord<F3>> {
+pub trait Mesh<F0: Float, VC: RgbaColor<F0>,
+               F1: Float, VP: Point<F1>,
+               F2: Float, VN: Normal<F2>,
+               F3: Float, VU: UvCoord<F3>> {
     fn new(_: Option<Self>,
            colors:    Vec<VC>,
            points:    Vec<VP>,
