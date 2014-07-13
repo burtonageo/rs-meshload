@@ -1,7 +1,7 @@
 use std::io::{BufferedReader, File, IoResult};
 
 use importers::mesh_importer::{MeshImporter};
-use types::{Mesh, VertexColor, VertexNormal, VertexPoint, VertexUvCoord};
+use types::{Mesh, RgbaColor, Normal, Point, UvCoord};
 
 struct ObjImporter;
 
@@ -11,10 +11,10 @@ impl ObjImporter {
     }
 }
 
-impl<F0: Float, VC: VertexColor<F0>,
-     F1: Float, VP: VertexPoint<F1>,
-     F2: Float, VN: VertexNormal<F2>,
-     F3: Float, VU: VertexUvCoord<F3>,
+impl<F0: Float, VC: RgbaColor<F0>,
+     F1: Float, VP: Point<F1>,
+     F2: Float, VN: Normal<F2>,
+     F3: Float, VU: UvCoord<F3>,
      M:  Mesh<F0, VC, F1, VP, F2, VN, F3, VU>> MeshImporter<F0, VC, F1, VP, F2, VN, F3, VU, M> for ObjImporter {
 
     fn load_mesh_file(&self, file_name: &str) -> IoResult<M> {
@@ -30,8 +30,26 @@ impl<F0: Float, VC: VertexColor<F0>,
 
         let mut textures: Vec<String> = Vec::new();
 
-        for l in file.lines().filter(|l| l.is_ok()) {
-            let line = l.unwrap();
+        let read_vert_info = |line: String| {
+            match line.as_slice().slice_to(2) {
+                "v " => (),
+                "vt" => (),
+                "vn" => (),
+                _ => ()
+            };
+        };
+
+        let read_face_info = |line: String| {
+            
+        };
+
+        for line in file.lines().filter(|line| line.is_ok()) {
+            let line = line.unwrap();
+            match line.as_slice().slice_to(1) {
+                "f" => read_face_info(line),
+                "v" => read_vert_info(line),
+                _    => ()
+            }
         }
 
         Ok(Mesh::new(None::<M>,
@@ -43,10 +61,10 @@ impl<F0: Float, VC: VertexColor<F0>,
     }
 }
 
-pub fn load_obj_mesh<F0: Float, VC: VertexColor<F0>,
-                     F1: Float, VP: VertexPoint<F1>,
-                     F2: Float, VN: VertexNormal<F2>,
-                     F3: Float, VU: VertexUvCoord<F3>,
+pub fn load_obj_mesh<F0: Float, VC: RgbaColor<F0>,
+                     F1: Float, VP: Point<F1>,
+                     F2: Float, VN: Normal<F2>,
+                     F3: Float, VU: UvCoord<F3>,
                      M:  Mesh<F0, VC, F1, VP, F2, VN, F3, VU>>(file_name: &str) -> IoResult<M> {
     ObjImporter::new().load_mesh_file(file_name)
 }
