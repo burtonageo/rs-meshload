@@ -3,7 +3,7 @@ use std::io::{BufferedReader, File, IoResult};
 use importers::mesh_importer::{MeshImporter};
 use types::{Mesh, RgbaColor, Normal, Point, UvCoord};
 
-struct ObjImporter;
+pub struct ObjImporter;
 
 impl ObjImporter {
     pub fn new() -> ObjImporter {
@@ -11,11 +11,11 @@ impl ObjImporter {
     }
 }
 
-impl<F0: Float, VC: RgbaColor<F0>,
-     F1: Float, VP: Point<F1>,
-     F2: Float, VN: Normal<F2>,
-     F3: Float, VU: UvCoord<F3>,
-     M:  Mesh<F0, VC, F1, VP, F2, VN, F3, VU>> MeshImporter<F0, VC, F1, VP, F2, VN, F3, VU, M> for ObjImporter {
+impl<F0: Float, C: RgbaColor<F0>,
+     F1: Float, P: Point<F1>,
+     F2: Float, N: Normal<F2>,
+     F3: Float, U: UvCoord<F3>,
+     M:  Mesh<F0, C, F1, P, F2, N, F3, U>> MeshImporter<F0, C, F1, P, F2, N, F3, U, M> for ObjImporter {
 
     fn load_mesh_file(&self, file_name: &str) -> IoResult<M> {
         unimplemented!();
@@ -23,12 +23,10 @@ impl<F0: Float, VC: RgbaColor<F0>,
         let path = Path::new(file_name);
         let mut file = BufferedReader::new(try!(File::open(&path)));
 
-        let (mut temp_colors, mut final_colors): (Vec<VC>, Vec<VC>) = (Vec::new(), Vec::new());
-        let (mut temp_points, mut final_points): (Vec<VP>, Vec<VP>) = (Vec::new(), Vec::new());
-        let (mut temp_normals, mut final_normals): (Vec<VN>, Vec<VN>) = (Vec::new(), Vec::new());
-        let (mut temp_uvcoords, mut final_uvcoords): (Vec<VU>, Vec<VU>) = (Vec::new(), Vec::new());
-
-        let mut textures: Vec<String> = Vec::new();
+        let (mut temp_colors, mut final_colors): (Vec<C>, Vec<C>) = (Vec::new(), Vec::new());
+        let (mut temp_points, mut final_points): (Vec<P>, Vec<P>) = (Vec::new(), Vec::new());
+        let (mut temp_normals, mut final_normals): (Vec<N>, Vec<N>) = (Vec::new(), Vec::new());
+        let (mut temp_uvcoords, mut final_uvcoords): (Vec<U>, Vec<U>) = (Vec::new(), Vec::new());
 
         let read_vert_info = |line: String| {
             match line.as_slice().slice_to(2) {
@@ -43,12 +41,13 @@ impl<F0: Float, VC: RgbaColor<F0>,
             
         };
 
-        for line in file.lines().filter(|line| line.is_ok()) {
-            let line = line.unwrap();
+        for line in file.lines()
+                        .filter(|line| line.is_ok())
+                        .map(|line| line.unwrap()) {
             match line.as_slice().slice_to(1) {
                 "f" => read_face_info(line),
                 "v" => read_vert_info(line),
-                _    => ()
+                "#" | _ => (),
             }
         }
 
