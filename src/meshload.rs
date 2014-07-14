@@ -1,4 +1,4 @@
-#![crate_id = "meshload#0.0.1"]
+#![crate_name = "meshload"]
 
 #![desc = "A library for loading 3D formats"]
 #![license = "MIT"]
