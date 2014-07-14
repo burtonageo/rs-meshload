@@ -23,7 +23,6 @@ impl<F0: Float, C: RgbaColor<F0>,
         let path = Path::new(file_name);
         let mut file = BufferedReader::new(try!(File::open(&path)));
 
-        let (mut temp_colors, mut final_colors): (Vec<C>, Vec<C>) = (Vec::new(), Vec::new());
         let (mut temp_points, mut final_points): (Vec<P>, Vec<P>) = (Vec::new(), Vec::new());
         let (mut temp_normals, mut final_normals): (Vec<N>, Vec<N>) = (Vec::new(), Vec::new());
         let (mut temp_uvcoords, mut final_uvcoords): (Vec<U>, Vec<U>) = (Vec::new(), Vec::new());
