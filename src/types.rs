@@ -39,16 +39,13 @@ pub trait UvCoord<T: Float> {
     fn get_v(&self) -> T;
 }
 
-pub trait Mesh<F0: Float, VC: RgbaColor<F0>,
-               F1: Float, VP: Point<F1>,
-               F2: Float, VN: Normal<F2>,
-               F3: Float, VU: UvCoord<F3>> {
+pub trait Mesh<F0: Float, P: Point<F0>,
+               F1: Float, N: Normal<F1>,
+               F2: Float, U: UvCoord<F2>> {
     fn new(_: Option<Self>,
-           colors:    Vec<VC>,
-           points:    Vec<VP>,
-           normals:   Vec<VN>,
-           uv_coords: Vec<VU>,
-           textures:  Vec<String>) -> Self;
+           points:    Vec<P>,
+           normals:   Vec<N>,
+           uv_coords: Vec<U>) -> Self;
 }
 /*
 pub trait NodeElement { }

@@ -11,11 +11,10 @@ impl ObjImporter {
     }
 }
 
-impl<F0: Float, C: RgbaColor<F0>,
-     F1: Float, P: Point<F1>,
-     F2: Float, N: Normal<F2>,
-     F3: Float, U: UvCoord<F3>,
-     M:  Mesh<F0, C, F1, P, F2, N, F3, U>> MeshImporter<F0, C, F1, P, F2, N, F3, U, M> for ObjImporter {
+impl<F0: Float, P: Point<F0>,
+     F1: Float, N: Normal<F1>,
+     F2: Float, U: UvCoord<F2>,
+     M:  Mesh<F0, P, F1, N, F2, U>> MeshImporter<F0, P, F1, N, F2, U, M> for ObjImporter {
 
     fn load_mesh_file(&self, file_name: &str) -> IoResult<M> {
         unimplemented!();
@@ -51,18 +50,15 @@ impl<F0: Float, C: RgbaColor<F0>,
         }
 
         Ok(Mesh::new(None::<M>,
-                     final_colors,
                      final_points,
                      final_normals,
-                     final_uvcoords,
-                     textures))
+                     final_uvcoords))
     }
 }
 
-pub fn load_obj_mesh<F0: Float, VC: RgbaColor<F0>,
-                     F1: Float, VP: Point<F1>,
-                     F2: Float, VN: Normal<F2>,
-                     F3: Float, VU: UvCoord<F3>,
-                     M:  Mesh<F0, VC, F1, VP, F2, VN, F3, VU>>(file_name: &str) -> IoResult<M> {
+pub fn load_obj_mesh<F0: Float, P: Point<F0>,
+                     F1: Float, N: Normal<F1>,
+                     F2: Float, U: UvCoord<F2>,
+                     M:  Mesh<F0, P, F1, N, F2, U>>(file_name: &str) -> IoResult<M> {
     ObjImporter::new().load_mesh_file(file_name)
 }
